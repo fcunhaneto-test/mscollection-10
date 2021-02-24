@@ -12,7 +12,6 @@ Route::get('/filmes/{channel}',
     function ($channel) {
     $table = 'movies';
     $subtitle = '';
-    $per_page = session('pp');
     $ms = new Media();
 
     if (Gate::allows('isAdmin')) {
@@ -26,7 +25,7 @@ Route::get('/filmes/{channel}',
             $subtitle = $m->name;
         }
     }
-    return view('titles', compact('subtitle', 'media', 'table', 'per_page'));
+    return view('titles', compact('subtitle', 'media', 'table'));
 })->name('movies');
 
 Route::get('/series/{channel}', function ($channel) {

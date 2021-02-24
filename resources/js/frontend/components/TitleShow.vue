@@ -1,5 +1,5 @@
 <template>
-    <div class="columns mt-5">
+    <div class="columns mt-5 mb-6">
         <div class="column is-10 is-offset-1">
             <div class="card bd-card">
                 <div class="card-header has-background-grey-dark">

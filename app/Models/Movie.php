@@ -22,24 +22,23 @@ class Movie extends Model
         return $this->belongsToMany(Director::class)->withPivot('order');
     }
 
-    public function frontendStart($channel)
+    public function frontendStart($channel, $pp)
     {
         $media = new Media();
         $id = $media->where('slug', $channel)->first()->id;
         $media = Media::find($id);
-        $total = ceil($media->movies->count()/session('pp'));
-        session(['pages' => $total]);
-        $movies = $media->movies()->orderBy('movies.title')->limit(session('pp'))->get();
+        $total = ceil($media->movies->count()/$pp);
+        $movies = $media->movies()->orderBy('movies.title')->limit($pp)->get();
         return [$total, $movies];
     }
 
-    public function frontendPage($channel, $page)
+    public function frontendPage($channel, $page, $pp)
     {
         $media = new Media();
         $id = $media->where('slug', $channel)->first()->id;
         $media = Media::find($id);
-        $offset = ($page - 1) * session('pp');
-        $movies = $media->movies()->orderBy('movies.title')->offset($offset)->limit(session('pp'))->get();
+        $offset = ($page - 1) * $pp;
+        $movies = $media->movies()->orderBy('movies.title')->offset($offset)->limit($pp)->get();
         return $movies;
     }
 

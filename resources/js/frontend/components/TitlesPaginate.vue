@@ -40,7 +40,7 @@ export default {
     methods: {
         getPage(num) {
             this.$store.commit('SET_PAGE', num)
-            axios.get(`/api/${this.table}/frontend-page/${this.channel}/${num}`).then(response => {
+            axios.get(`/api/${this.table}/frontend-page/${this.channel}/${num}/${this.per_page}`).then(response => {
                 console.log('SET TITLES', response.data)
                 this.$store.commit('SET_TITLES', response.data)
             }).catch(error => console.log(error))

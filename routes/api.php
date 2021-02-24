@@ -8,8 +8,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::prefix('movies')->group(function() {
-    Route::get('/frontend-start/{channel}/', 'MovieController@frontendStart');
-    Route::get('/frontend-page/{channel}/{page}', 'MovieController@frontendPage');
+    Route::get('/frontend-start/{channel}/{pp}', 'MovieController@frontendStart');
+    Route::get('/frontend-page/{channel}/{page}/{pp}', 'MovieController@frontendPage');
 
     Route::get('/cast/{id}', 'MovieController@cast');
     Route::get('/producers/{id}', 'MovieController@producers');

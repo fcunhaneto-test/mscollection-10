@@ -1,16 +1,16 @@
 <template>
-    <div class="container">
+    <div class="container mb-6">
         <div v-if="!show_page">
-            <nav class="level mb-0">
-                <div class="level-left">
+            <div class="columns mb-0">
+                <div class="column is-8-widescreen">
                     <h1 class="title is-3 has-text-centered mt-4 mb-0">Filmes {{ subheader }}</h1>
                 </div>
-                <div class="level-right">
+                <div class="column is-4-widescreen">
                     <div class="field is-horizontal mt-4 mb-0">
                         <label class="label mt-2 mr-3">Títulos Por pagina</label>
                         <div class="field">
                             <div class="select">
-                                <select v-model="per_page">
+                                <select v-model="pp">
                                     <option value="10">10</option>
                                     <option value="20">20</option>
                                     <option value="30">30</option>
@@ -21,7 +21,7 @@
                         </div>
                     </div>
                 </div>
-            </nav>
+            </div>
             <titles-paginate :pages="pages"></titles-paginate>
             <titles-table @showTitle="showPage($event)"></titles-table>
         </div>
@@ -49,7 +49,7 @@ export default {
             pages: null,
             show_page: false,
             title: null,
-            pp: 10,
+            pp: null,
         }
     },
     computed: {
@@ -62,25 +62,25 @@ export default {
     },
     watch: {
         pp() {
-            axios.get(`/api/per-page/${pp}`).then(response => {
-                this.$store.commit('SET_PER_PAGE', this.pp())
-            }).catch(errors => console.log(errors));
+            this.$store.commit('SET_PER_PAGE', this.pp)
+            this.startTitles()
         }
     },
     methods: {
         showPage(event) {
-            console.log(event)
             this.show_page = true
             this.title = event
+        },
+        startTitles() {
+            this.pp = this.per_page
+            axios.get(`/api/movies/frontend-start/${this.channel}/${this.per_page}`).then(response => {
+                this.pages = response.data[0]
+                this.$store.commit('SET_TITLES', response.data[1])
+            })
         }
     },
     beforeMount() {
-        axios.get(`/api/movies/frontend-start/${this.channel}`).then(response => {
-            this.pages = response.data[0]
-            this.pp = this.$store.getters.getPerPage
-            // this.$store.commit('SET_PAGES', response.data[0])
-            this.$store.commit('SET_TITLES', response.data[1])
-        })
+       this.startTitles()
     }
 }
 </script>

@@ -8,5 +8,4 @@
 
 @section('content')
     <index :subheader="'{{ $subtitle }}'" :table="'{{ $table }}'"></index>
-    PER_PAGE = {{ $per_page }}
 @endsection

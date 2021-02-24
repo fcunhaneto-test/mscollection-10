@@ -1849,19 +1849,64 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Index",
   props: {
     subheader: String,
-    table: String,
-    per_page: String,
-    pages: String
+    table: String
   },
   beforeMount: function beforeMount() {
-    console.log('CHANNEL', this.$route.params.channel);
     this.$store.commit('SET_CHANNEL', this.$route.params.channel);
     this.$store.commit('SET_TABLE', this.table);
-    this.$store.commit('SET_PER_PAGE', parseInt(this.per_page));
   }
 });
 
@@ -1930,7 +1975,7 @@ __webpack_require__.r(__webpack_exports__);
       pages: null,
       show_page: false,
       title: null,
-      pp: 10
+      pp: null
     };
   },
   computed: {
@@ -1942,42 +1987,29 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   watch: {
-    pp: function (_pp) {
-      function pp() {
-        return _pp.apply(this, arguments);
-      }
-
-      pp.toString = function () {
-        return _pp.toString();
-      };
-
-      return pp;
-    }(function () {
-      var _this = this;
-
-      axios.get("/api/per-page/".concat(pp)).then(function (response) {
-        _this.$store.commit('SET_PER_PAGE', _this.pp());
-      })["catch"](function (errors) {
-        return console.log(errors);
-      });
-    })
+    pp: function pp() {
+      this.$store.commit('SET_PER_PAGE', this.pp);
+      this.startTitles();
+    }
   },
   methods: {
     showPage: function showPage(event) {
-      console.log(event);
       this.show_page = true;
       this.title = event;
+    },
+    startTitles: function startTitles() {
+      var _this = this;
+
+      this.pp = this.per_page;
+      axios.get("/api/movies/frontend-start/".concat(this.channel, "/").concat(this.per_page)).then(function (response) {
+        _this.pages = response.data[0];
+
+        _this.$store.commit('SET_TITLES', response.data[1]);
+      });
     }
   },
   beforeMount: function beforeMount() {
-    var _this2 = this;
-
-    axios.get("/api/movies/frontend-start/".concat(this.channel)).then(function (response) {
-      _this2.pages = response.data[0];
-      _this2.pp = _this2.$store.getters.getPerPage; // this.$store.commit('SET_PAGES', response.data[0])
-
-      _this2.$store.commit('SET_TITLES', response.data[1]);
-    });
+    this.startTitles();
   }
 });
 
@@ -2168,7 +2200,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.$store.commit('SET_PAGE', num);
-      axios.get("/api/".concat(this.table, "/frontend-page/").concat(this.channel, "/").concat(num)).then(function (response) {
+      axios.get("/api/".concat(this.table, "/frontend-page/").concat(this.channel, "/").concat(num, "/").concat(this.per_page)).then(function (response) {
         console.log('SET TITLES', response.data);
 
         _this.$store.commit('SET_TITLES', response.data);
@@ -37933,9 +37965,166 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("router-view", { attrs: { subheader: _vm.subheader } })
+  return _c(
+    "div",
+    [
+      _c("router-view", { attrs: { subheader: _vm.subheader } }),
+      _vm._v(" "),
+      _vm._m(0)
+    ],
+    1
+  )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "footer",
+      { staticClass: "footer mt-6 pt-6 pb-6 has-background-link-dark" },
+      [
+        _c("div", { staticClass: "container" }, [
+          _c("span", { staticClass: "title is-6 has-text-white" }, [
+            _vm._v("Classificação:")
+          ]),
+          _vm._v(" "),
+          _c("ul", [
+            _c("li", [
+              _c("span", { staticClass: "icon has-text-warning" }, [
+                _c("i", { staticClass: "fas fa-star" })
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "icon has-text-white" }, [
+                _c("i", { staticClass: "fas fa-star" })
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "icon has-text-white" }, [
+                _c("i", { staticClass: "fas fa-star" })
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "icon has-text-white" }, [
+                _c("i", { staticClass: "fas fa-star" })
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "icon has-text-white" }, [
+                _c("i", { staticClass: "fas fa-star mr-2" })
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "has-text-white" }, [
+                _vm._v("Ruim (Não dá para assistir)")
+              ])
+            ]),
+            _vm._v(" "),
+            _c("li", [
+              _c("span", { staticClass: "icon has-text-warning" }, [
+                _c("i", { staticClass: "fas fa-star" })
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "icon has-text-warning" }, [
+                _c("i", { staticClass: "fas fa-star" })
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "icon has-text-white" }, [
+                _c("i", { staticClass: "fas fa-star" })
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "icon has-text-white" }, [
+                _c("i", { staticClass: "fas fa-star" })
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "icon has-text-white" }, [
+                _c("i", { staticClass: "fas fa-star mr-2" })
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "has-text-white" }, [
+                _vm._v("Regular (Depende dá sua boa vontade)")
+              ])
+            ]),
+            _vm._v(" "),
+            _c("li", [
+              _c("span", { staticClass: "icon has-text-warning" }, [
+                _c("i", { staticClass: "fas fa-star" })
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "icon has-text-warning" }, [
+                _c("i", { staticClass: "fas fa-star" })
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "icon has-text-warning" }, [
+                _c("i", { staticClass: "fas fa-star" })
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "icon has-text-white" }, [
+                _c("i", { staticClass: "fas fa-star" })
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "icon has-text-white" }, [
+                _c("i", { staticClass: "fas fa-star mr-2" })
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "has-text-white" }, [
+                _vm._v("Bom (Pode assistir tranquilamente)")
+              ])
+            ]),
+            _vm._v(" "),
+            _c("li", [
+              _c("span", { staticClass: "icon has-text-warning" }, [
+                _c("i", { staticClass: "fas fa-star" })
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "icon has-text-warning" }, [
+                _c("i", { staticClass: "fas fa-star" })
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "icon has-text-warning" }, [
+                _c("i", { staticClass: "fas fa-star" })
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "icon has-text-warning" }, [
+                _c("i", { staticClass: "fas fa-star" })
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "icon has-text-white" }, [
+                _c("i", { staticClass: "fas fa-star mr-2" })
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "has-text-white" }, [
+                _vm._v("Ótimo (Não deixe de assistir)")
+              ])
+            ]),
+            _vm._v(" "),
+            _c("li", [
+              _c("span", { staticClass: "icon has-text-warning" }, [
+                _c("i", { staticClass: "fas fa-star" })
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "icon has-text-warning" }, [
+                _c("i", { staticClass: "fas fa-star" })
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "icon has-text-warning" }, [
+                _c("i", { staticClass: "fas fa-star" })
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "icon has-text-warning" }, [
+                _c("i", { staticClass: "fas fa-star" })
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "icon has-text-warning" }, [
+                _c("i", { staticClass: "fas fa-star mr-2" })
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "has-text-white" }, [
+                _vm._v("Excelente (Imperdível)")
+              ])
+            ])
+          ])
+        ])
+      ]
+    )
+  }
+]
 render._withStripped = true
 
 
@@ -37960,14 +38149,14 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "container" },
+    { staticClass: "container mb-6" },
     [
       !_vm.show_page
         ? _c(
             "div",
             [
-              _c("nav", { staticClass: "level mb-0" }, [
-                _c("div", { staticClass: "level-left" }, [
+              _c("div", { staticClass: "columns mb-0" }, [
+                _c("div", { staticClass: "column is-8-widescreen" }, [
                   _c(
                     "h1",
                     { staticClass: "title is-3 has-text-centered mt-4 mb-0" },
@@ -37975,7 +38164,7 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "level-right" }, [
+                _c("div", { staticClass: "column is-4-widescreen" }, [
                   _c("div", { staticClass: "field is-horizontal mt-4 mb-0" }, [
                     _c("label", { staticClass: "label mt-2 mr-3" }, [
                       _vm._v("Títulos Por pagina")
@@ -37990,8 +38179,8 @@ var render = function() {
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.per_page,
-                                expression: "per_page"
+                                value: _vm.pp,
+                                expression: "pp"
                               }
                             ],
                             on: {
@@ -38004,7 +38193,7 @@ var render = function() {
                                     var val = "_value" in o ? o._value : o.value
                                     return val
                                   })
-                                _vm.per_page = $event.target.multiple
+                                _vm.pp = $event.target.multiple
                                   ? $$selectedVal
                                   : $$selectedVal[0]
                               }
@@ -38085,7 +38274,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "columns mt-5" }, [
+  return _c("div", { staticClass: "columns mt-5 mb-6" }, [
     _c("div", { staticClass: "column is-10 is-offset-1" }, [
       _c("div", { staticClass: "card bd-card" }, [
         _c("div", { staticClass: "card-header has-background-grey-dark" }, [
