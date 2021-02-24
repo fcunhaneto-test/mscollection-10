@@ -9,12 +9,14 @@
                             <img v-else :src="url" width="120" height="90">
                         </figure>
                         <div class="media-content v-center">
-                            <div class="mt-3" >
+                            <div class="mt-3">
                                 <h3 class="title is-3 has-text-white">{{ title.title }}</h3>
                             </div>
                             <div class="is-inline-block mt-4">
                                 <b-tag class="mr-2" type="is-info" size="is-medium">Ano: {{ title.year }}</b-tag>
-                                <b-tag class="mr-4" v-if="title.time" type="is-info" size="is-medium">Duração: {{ title.time | strTime }}</b-tag>
+                                <b-tag class="mr-4" v-if="title.time" type="is-info" size="is-medium">Duração:
+                                    {{ title.time | strTime }}
+                                </b-tag>
                                 <span>
                             <b-icon v-for="(star, key) in title.rating" class="has-text-warning"
                                     :key="key+'y'"
@@ -30,7 +32,8 @@
                             </div>
                             <b-taglist class="mt-2 mb-0">
                                 <b-tag v-if="title.category_2" type="is-light" class="has-text-black" size="is-medium">
-                                    Categorias: {{ title.category_1 }}, {{ title.category_2 }}</b-tag>
+                                    Categorias: {{ title.category_1 }}, {{ title.category_2 }}
+                                </b-tag>
                                 <b-tag v-else type="is-dark" size="is-medium">Categoria: {{ title.category_1 }}</b-tag>
                             </b-taglist>
                         </div>
@@ -47,9 +50,12 @@
                         <h5 class="title is-5 mb-2 pb-0">Resumo:</h5>
                         <p>{{ title.synopsis }}</p>
                     </div>
-                    <table class="table is-fullwidth">
+                    <table class="table is-fullwidth" >
                         <thead class="has-background-white">
-                        <tr><th class="title is-5 has-text-dark">Ator/Personagem</th><th class="title is-5"></th></tr>
+                        <tr>
+                            <th class="title is-5 has-text-dark">Ator/Personagem</th>
+                            <th class="title is-5">{{ cast.length }}</th>
+                        </tr>
                         </thead>
                         <tbody>
                         <tr v-for="ac in cast">
@@ -60,7 +66,12 @@
                     </table>
                     <table class="table is-fullwidth">
                         <thead class="has-background-white">
-                        <tr><th class="title is-5 has-text-dark">Diretores</th></tr>
+                        <tr>
+                            <th class="title is-5 has-text-dark">
+                                <span v-if="table === 'movies'">Diretores</span>
+                                <span v-if="table === 'series'">Criadores</span>
+                            </th>
+                        </tr>
                         </thead>
                         <tbody>
                         <tr v-for="producer in producers">
@@ -84,8 +95,8 @@ export default {
         return {
             isOpen: false,
             url: "../images/poster/faker-poster.png",
-            cast: [],
-            producers: [],
+            cast: null,
+            producers: null,
         }
     },
     computed: {

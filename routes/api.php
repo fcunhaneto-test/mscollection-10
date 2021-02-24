@@ -15,7 +15,10 @@ Route::prefix('movies')->group(function() {
     Route::get('/producers/{id}', 'MovieController@producers');
 });
 
-Route::get('/per-page/{num}', function ($num) {
-    session(['pp' => parseInt($num)]);
-    dd(session('pp'));
+Route::prefix('series')->group(function() {
+    Route::get('/frontend-start/{channel}/{pp}', 'SeriesController@frontendStart');
+    Route::get('/frontend-page/{channel}/{page}/{pp}', 'SeriesController@frontendPage');
+
+    Route::get('/cast/{id}', 'SeriesController@cast');
+    Route::get('/producers/{id}', 'SeriesController@producers');
 });

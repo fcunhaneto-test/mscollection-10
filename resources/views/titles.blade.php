@@ -7,5 +7,5 @@
 @endsection
 
 @section('content')
-    <index :subheader="'{{ $subtitle }}'" :table="'{{ $table }}'"></index>
+    <index :header="'{{ $title }}'" :subheader="'{{ $subtitle }}'" :table="'{{ $table }}'"></index>
 @endsection

@@ -8,11 +8,11 @@ const routes = [
         component: Titles,
         name: 'movies'
     },
-    // {
-    //     path: '/series/:channel',
-    //     component: Titles,
-    //     name: 'series'
-    // },
+    {
+        path: '/series/:channel',
+        component: Titles,
+        name: 'series'
+    },
 ];
 
 const router = new VueRouter({

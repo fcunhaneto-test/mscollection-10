@@ -1901,6 +1901,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Index",
   props: {
+    header: String,
     subheader: String,
     table: String
   },
@@ -1968,6 +1969,7 @@ __webpack_require__.r(__webpack_exports__);
     TitleShow: _components_TitleShow__WEBPACK_IMPORTED_MODULE_2__.default
   },
   props: {
+    header: String,
     subheader: String
   },
   data: function data() {
@@ -1979,6 +1981,9 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   computed: {
+    table: function table() {
+      return this.$store.getters.getTable;
+    },
     channel: function channel() {
       return this.$store.getters.getChannel;
     },
@@ -1989,6 +1994,7 @@ __webpack_require__.r(__webpack_exports__);
   watch: {
     pp: function pp() {
       this.$store.commit('SET_PER_PAGE', this.pp);
+      this.$store.commit('SET_PAGE', 1);
       this.startTitles();
     }
   },
@@ -2001,7 +2007,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.pp = this.per_page;
-      axios.get("/api/movies/frontend-start/".concat(this.channel, "/").concat(this.per_page)).then(function (response) {
+      console.log('URL', "/api/".concat(this.table, "/frontend-start/").concat(this.channel, "/").concat(this.per_page));
+      axios.get("/api/".concat(this.table, "/frontend-start/").concat(this.channel, "/").concat(this.per_page)).then(function (response) {
         _this.pages = response.data[0];
 
         _this.$store.commit('SET_TITLES', response.data[1]);
@@ -2102,6 +2109,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "TitleShow",
   props: {
@@ -2111,8 +2129,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       isOpen: false,
       url: "../images/poster/faker-poster.png",
-      cast: [],
-      producers: []
+      cast: null,
+      producers: null
     };
   },
   computed: {
@@ -2249,9 +2267,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "TitlesTable",
   computed: {
+    table: function table() {
+      return this.$store.getters.getTable;
+    },
     titles: function titles() {
       return this.$store.getters.getTitles;
     }
@@ -2336,12 +2369,11 @@ var routes = [{
   path: '/filmes/:channel',
   component: _frontend_Titles__WEBPACK_IMPORTED_MODULE_0__.default,
   name: 'movies'
-} // {
-//     path: '/series/:channel',
-//     component: Titles,
-//     name: 'series'
-// },
-];
+}, {
+  path: '/series/:channel',
+  component: _frontend_Titles__WEBPACK_IMPORTED_MODULE_0__.default,
+  name: 'series'
+}];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__.default({
   mode: "history",
   routes: routes
@@ -37968,7 +38000,9 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("router-view", { attrs: { subheader: _vm.subheader } }),
+      _c("router-view", {
+        attrs: { header: _vm.header, subheader: _vm.subheader }
+      }),
       _vm._v(" "),
       _vm._m(0)
     ],
@@ -37991,7 +38025,7 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("ul", [
             _c("li", [
-              _c("span", { staticClass: "icon has-text-warning" }, [
+              _c("span", { staticClass: "icon has-text-orange" }, [
                 _c("i", { staticClass: "fas fa-star" })
               ]),
               _vm._v(" "),
@@ -38017,11 +38051,11 @@ var staticRenderFns = [
             ]),
             _vm._v(" "),
             _c("li", [
-              _c("span", { staticClass: "icon has-text-warning" }, [
+              _c("span", { staticClass: "icon has-text-orange" }, [
                 _c("i", { staticClass: "fas fa-star" })
               ]),
               _vm._v(" "),
-              _c("span", { staticClass: "icon has-text-warning" }, [
+              _c("span", { staticClass: "icon has-text-orange" }, [
                 _c("i", { staticClass: "fas fa-star" })
               ]),
               _vm._v(" "),
@@ -38043,15 +38077,15 @@ var staticRenderFns = [
             ]),
             _vm._v(" "),
             _c("li", [
-              _c("span", { staticClass: "icon has-text-warning" }, [
+              _c("span", { staticClass: "icon has-text-orange" }, [
                 _c("i", { staticClass: "fas fa-star" })
               ]),
               _vm._v(" "),
-              _c("span", { staticClass: "icon has-text-warning" }, [
+              _c("span", { staticClass: "icon has-text-orange" }, [
                 _c("i", { staticClass: "fas fa-star" })
               ]),
               _vm._v(" "),
-              _c("span", { staticClass: "icon has-text-warning" }, [
+              _c("span", { staticClass: "icon has-text-orange" }, [
                 _c("i", { staticClass: "fas fa-star" })
               ]),
               _vm._v(" "),
@@ -38069,19 +38103,19 @@ var staticRenderFns = [
             ]),
             _vm._v(" "),
             _c("li", [
-              _c("span", { staticClass: "icon has-text-warning" }, [
+              _c("span", { staticClass: "icon has-text-orange" }, [
                 _c("i", { staticClass: "fas fa-star" })
               ]),
               _vm._v(" "),
-              _c("span", { staticClass: "icon has-text-warning" }, [
+              _c("span", { staticClass: "icon has-text-orange" }, [
                 _c("i", { staticClass: "fas fa-star" })
               ]),
               _vm._v(" "),
-              _c("span", { staticClass: "icon has-text-warning" }, [
+              _c("span", { staticClass: "icon has-text-orange" }, [
                 _c("i", { staticClass: "fas fa-star" })
               ]),
               _vm._v(" "),
-              _c("span", { staticClass: "icon has-text-warning" }, [
+              _c("span", { staticClass: "icon has-text-orange" }, [
                 _c("i", { staticClass: "fas fa-star" })
               ]),
               _vm._v(" "),
@@ -38095,23 +38129,23 @@ var staticRenderFns = [
             ]),
             _vm._v(" "),
             _c("li", [
-              _c("span", { staticClass: "icon has-text-warning" }, [
+              _c("span", { staticClass: "icon has-text-orange" }, [
                 _c("i", { staticClass: "fas fa-star" })
               ]),
               _vm._v(" "),
-              _c("span", { staticClass: "icon has-text-warning" }, [
+              _c("span", { staticClass: "icon has-text-orange" }, [
                 _c("i", { staticClass: "fas fa-star" })
               ]),
               _vm._v(" "),
-              _c("span", { staticClass: "icon has-text-warning" }, [
+              _c("span", { staticClass: "icon has-text-orange" }, [
                 _c("i", { staticClass: "fas fa-star" })
               ]),
               _vm._v(" "),
-              _c("span", { staticClass: "icon has-text-warning" }, [
+              _c("span", { staticClass: "icon has-text-orange" }, [
                 _c("i", { staticClass: "fas fa-star" })
               ]),
               _vm._v(" "),
-              _c("span", { staticClass: "icon has-text-warning" }, [
+              _c("span", { staticClass: "icon has-text-orange" }, [
                 _c("i", { staticClass: "fas fa-star mr-2" })
               ]),
               _vm._v(" "),
@@ -38160,7 +38194,7 @@ var render = function() {
                   _c(
                     "h1",
                     { staticClass: "title is-3 has-text-centered mt-4 mb-0" },
-                    [_vm._v("Filmes " + _vm._s(_vm.subheader))]
+                    [_vm._v(_vm._s(_vm.header) + " " + _vm._s(_vm.subheader))]
                   )
                 ]),
                 _vm._v(" "),
@@ -38328,8 +38362,9 @@ var render = function() {
                             },
                             [
                               _vm._v(
-                                "Duração: " +
-                                  _vm._s(_vm._f("strTime")(_vm.title.time))
+                                "Duração:\n                                " +
+                                  _vm._s(_vm._f("strTime")(_vm.title.time)) +
+                                  "\n                            "
                               )
                             ]
                           )
@@ -38376,7 +38411,8 @@ var render = function() {
                                 "\n                                Categorias: " +
                                   _vm._s(_vm.title.category_1) +
                                   ", " +
-                                  _vm._s(_vm.title.category_2)
+                                  _vm._s(_vm.title.category_2) +
+                                  "\n                            "
                               )
                             ]
                           )
@@ -38424,7 +38460,17 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("table", { staticClass: "table is-fullwidth" }, [
-            _vm._m(0),
+            _c("thead", { staticClass: "has-background-white" }, [
+              _c("tr", [
+                _c("th", { staticClass: "title is-5 has-text-dark" }, [
+                  _vm._v("Ator/Personagem")
+                ]),
+                _vm._v(" "),
+                _c("th", { staticClass: "title is-5" }, [
+                  _vm._v(_vm._s(_vm.cast.length))
+                ])
+              ])
+            ]),
             _vm._v(" "),
             _c(
               "tbody",
@@ -38440,7 +38486,19 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("table", { staticClass: "table is-fullwidth" }, [
-            _vm._m(1),
+            _c("thead", { staticClass: "has-background-white" }, [
+              _c("tr", [
+                _c("th", { staticClass: "title is-5 has-text-dark" }, [
+                  _vm.table === "movies"
+                    ? _c("span", [_vm._v("Diretores")])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.table === "series"
+                    ? _c("span", [_vm._v("Criadores")])
+                    : _vm._e()
+                ])
+              ])
+            ]),
             _vm._v(" "),
             _c(
               "tbody",
@@ -38459,33 +38517,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", { staticClass: "has-background-white" }, [
-      _c("tr", [
-        _c("th", { staticClass: "title is-5 has-text-dark" }, [
-          _vm._v("Ator/Personagem")
-        ]),
-        _c("th", { staticClass: "title is-5" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", { staticClass: "has-background-white" }, [
-      _c("tr", [
-        _c("th", { staticClass: "title is-5 has-text-dark" }, [
-          _vm._v("Diretores")
-        ])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -38578,7 +38610,21 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _vm.titles
     ? _c("table", { staticClass: "table is-fullwidth" }, [
-        _vm._m(0),
+        _c("thead", [
+          _c("tr", [
+            _c("th", [_vm._v("Títulos")]),
+            _vm._v(" "),
+            _c("th", [_vm._v("Ano")]),
+            _vm._v(" "),
+            _vm.table === "movies" ? _c("th", [_vm._v("Tempo")]) : _vm._e(),
+            _vm._v(" "),
+            _c("th", [_vm._v("Rating")]),
+            _vm._v(" "),
+            _c("th", [_vm._v("Categoria 1")]),
+            _vm._v(" "),
+            _c("th", [_vm._v("Categoria 2")])
+          ])
+        ]),
         _vm._v(" "),
         _c(
           "tbody",
@@ -38601,10 +38647,31 @@ var render = function() {
               _vm._v(" "),
               _c("td", [_vm._v(_vm._s(title.year))]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(_vm._f("strTime")(title.time)))]),
+              _vm.table === "movies"
+                ? _c("td", [_vm._v(_vm._s(_vm._f("strTime")(title.time)))])
+                : _vm._e(),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(title.rating))]),
-              _vm._v(" "),
+              _c(
+                "td",
+                [
+                  _vm._l(title.rating, function(star, key) {
+                    return _c("b-icon", {
+                      key: key + "y",
+                      staticClass: "has-text-orange",
+                      attrs: { pack: "fas", icon: "star" }
+                    })
+                  }),
+                  _vm._v(" "),
+                  _vm._l(5 - title.rating, function(star, key) {
+                    return _c("b-icon", {
+                      key: key + "w",
+                      staticClass: "has-text-dark",
+                      attrs: { pack: "far", icon: "star" }
+                    })
+                  })
+                ],
+                2
+              ),
               _c("td", [_vm._v(_vm._s(title.category_1))]),
               _vm._v(" "),
               _c("td", [_vm._v(_vm._s(title.category_2))])
@@ -38615,28 +38682,7 @@ var render = function() {
       ])
     : _vm._e()
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", [_vm._v("Títulos")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Ano")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Tempo")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Rating")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Categoria 1")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Categoria 2")])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

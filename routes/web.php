@@ -11,6 +11,7 @@ Route::get('/', function () {
 Route::get('/filmes/{channel}',
     function ($channel) {
     $table = 'movies';
+    $title = 'Filmes';
     $subtitle = '';
     $ms = new Media();
 
@@ -25,27 +26,29 @@ Route::get('/filmes/{channel}',
             $subtitle = $m->name;
         }
     }
-    return view('titles', compact('subtitle', 'media', 'table'));
+    return view('titles', compact('title', 'subtitle', 'media', 'table'));
 })->name('movies');
 
-Route::get('/series/{channel}', function ($channel) {
-    $table = 'series';
-    $subtitle = '';
-    $ms = new Media();
+Route::get('/series/{channel}',
+    function ($channel) {
+        $table = 'series';
+        $title = 'Séries';
+        $subtitle = '';
+        $ms = new Media();
 
-    if (Gate::allows('isAdmin')) {
-        $media =  $ms->get();
-    } else {
-        $media = $ms->isStream();
-    }
-
-    foreach ($media as $m) {
-        if($m->slug == $channel) {
-            $subtitle = $m->name;
+        if (Gate::allows('isAdmin')) {
+            $media =  Media::all();
+        } else {
+            $media = $ms->isStream();
         }
-    }
 
-    return view('titles', compact('subtitle', 'media', 'table'));
+        foreach ($media as $m) {
+            if($m->slug == $channel) {
+                $subtitle = $m->name;
+            }
+        }
+
+    return view('titles', compact('title', 'subtitle', 'media', 'table'));
 })->name('series');
 
 Auth::routes();

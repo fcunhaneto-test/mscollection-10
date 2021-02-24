@@ -3,7 +3,7 @@
         <div v-if="!show_page">
             <div class="columns mb-0">
                 <div class="column is-8-widescreen">
-                    <h1 class="title is-3 has-text-centered mt-4 mb-0">Filmes {{ subheader }}</h1>
+                    <h1 class="title is-3 has-text-centered mt-4 mb-0">{{ header }} {{ subheader }}</h1>
                 </div>
                 <div class="column is-4-widescreen">
                     <div class="field is-horizontal mt-4 mb-0">
@@ -42,6 +42,7 @@ export default {
         TitleShow
     },
     props: {
+        header: String,
         subheader: String
     },
     data() {
@@ -53,6 +54,9 @@ export default {
         }
     },
     computed: {
+        table() {
+            return this.$store.getters.getTable
+        },
         channel() {
             return this.$store.getters.getChannel
         },
@@ -63,6 +67,7 @@ export default {
     watch: {
         pp() {
             this.$store.commit('SET_PER_PAGE', this.pp)
+            this.$store.commit('SET_PAGE', 1)
             this.startTitles()
         }
     },
@@ -73,7 +78,8 @@ export default {
         },
         startTitles() {
             this.pp = this.per_page
-            axios.get(`/api/movies/frontend-start/${this.channel}/${this.per_page}`).then(response => {
+            console.log('URL', `/api/${this.table}/frontend-start/${this.channel}/${this.per_page}`)
+            axios.get(`/api/${this.table}/frontend-start/${this.channel}/${this.per_page}`).then(response => {
                 this.pages = response.data[0]
                 this.$store.commit('SET_TITLES', response.data[1])
             })
@@ -81,7 +87,7 @@ export default {
     },
     beforeMount() {
        this.startTitles()
-    }
+    },
 }
 </script>
 

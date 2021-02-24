@@ -1,7 +1,7 @@
 <nav class="navbar is-link" role="navigation" aria-label="main navigation">
     <div class="container">
         <div class="navbar-brand mr-3">
-            <a class="navbar-item is-active" href="https://bulma.io">
+            <a class="navbar-item is-active" href="{{ url('/') }}">
                 {{ config('app.name', 'Laravel') }}
             </a>
 
