@@ -1,0 +1,25 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bulma
+@import "~bulma/bulma";
+@import "~buefy/src/scss/buefy";
+
+.has-border {
+    border: 1px solid #000000;
+}
+
+.navbar-item {
+    color: #FFFFFF;
+}
+
+.navbar-dropdown {
+    background-color: #0074d7;
+}
+
+.table {
+    border-bottom: 1px solid #000000;
+}
