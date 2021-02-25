@@ -2120,6 +2120,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "TitleShow",
   props: {
@@ -2129,8 +2135,10 @@ __webpack_require__.r(__webpack_exports__);
     return {
       isOpen: false,
       url: "../images/poster/faker-poster.png",
-      cast: null,
-      producers: null
+      cast: [],
+      cast_total: 0,
+      producers: [],
+      prod_total: 0
     };
   },
   computed: {
@@ -2151,11 +2159,17 @@ __webpack_require__.r(__webpack_exports__);
 
     axios.get("/api/".concat(this.table, "/cast/").concat(this.title.id)).then(function (response) {
       _this.cast = response.data;
+      _this.cast_total = _this.cast.length;
+      console.log('Total Cast', _this.cast_total);
+      console.log('Cast', _this.cast);
     })["catch"](function (errors) {
       return console.log(errors);
     });
     axios.get("/api/".concat(this.table, "/producers/").concat(this.title.id)).then(function (response) {
       _this.producers = response.data;
+      _this.prod_total = _this.producers.length;
+      console.log('Total Producers', _this.prod_total);
+      console.log('Producers', _this.producers);
     })["catch"](function (errors) {
       return console.log(errors);
     });
@@ -38459,59 +38473,77 @@ var render = function() {
             _c("p", [_vm._v(_vm._s(_vm.title.synopsis))])
           ]),
           _vm._v(" "),
-          _c("table", { staticClass: "table is-fullwidth" }, [
-            _c("thead", { staticClass: "has-background-white" }, [
-              _c("tr", [
-                _c("th", { staticClass: "title is-5 has-text-dark" }, [
-                  _vm._v("Ator/Personagem")
+          _vm.cast_total > 0
+            ? _c("table", { staticClass: "table is-fullwidth" }, [
+                _c("thead", { staticClass: "has-background-white" }, [
+                  _c("tr", [
+                    _c("th", { staticClass: "title is-5 has-text-dark" }, [
+                      _vm._v("Ator/Personagem")
+                    ]),
+                    _vm._v(" "),
+                    _c("th", { staticClass: "title is-5" }, [
+                      _vm._v(_vm._s(_vm.cast.length))
+                    ])
+                  ])
                 ]),
                 _vm._v(" "),
-                _c("th", { staticClass: "title is-5" }, [
-                  _vm._v(_vm._s(_vm.cast.length))
-                ])
+                _c(
+                  "tbody",
+                  _vm._l(_vm.cast, function(ac) {
+                    return _c("tr", [
+                      _c("td", { staticClass: "pl-5" }, [
+                        _vm._v(_vm._s(ac.actor))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(ac.character))])
+                    ])
+                  }),
+                  0
+                )
               ])
-            ]),
-            _vm._v(" "),
-            _c(
-              "tbody",
-              _vm._l(_vm.cast, function(ac) {
-                return _c("tr", [
-                  _c("td", { staticClass: "pl-5" }, [_vm._v(_vm._s(ac.actor))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(ac.character))])
-                ])
-              }),
-              0
-            )
-          ]),
+            : _vm._e(),
           _vm._v(" "),
-          _c("table", { staticClass: "table is-fullwidth" }, [
-            _c("thead", { staticClass: "has-background-white" }, [
-              _c("tr", [
-                _c("th", { staticClass: "title is-5 has-text-dark" }, [
-                  _vm.table === "movies"
-                    ? _c("span", [_vm._v("Diretores")])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.table === "series"
-                    ? _c("span", [_vm._v("Criadores")])
-                    : _vm._e()
-                ])
+          _vm.prod_total > 0
+            ? _c("table", { staticClass: "table is-fullwidth" }, [
+                _c("thead", { staticClass: "has-background-white" }, [
+                  _vm.prod_total > 1
+                    ? _c("tr", [
+                        _c("th", { staticClass: "title is-5 has-text-dark" }, [
+                          _vm.table === "movies"
+                            ? _c("span", [_vm._v("Diretores")])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.table === "series"
+                            ? _c("span", [_vm._v("Criadores")])
+                            : _vm._e()
+                        ])
+                      ])
+                    : _c("tr", [
+                        _c("th", { staticClass: "title is-5 has-text-dark" }, [
+                          _vm.table === "movies"
+                            ? _c("span", [_vm._v("Diretor")])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.table === "series"
+                            ? _c("span", [_vm._v("Criador")])
+                            : _vm._e()
+                        ])
+                      ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  _vm._l(_vm.producers, function(producer) {
+                    return _c("tr", [
+                      _c("td", { staticClass: "pl-5" }, [
+                        _vm._v(_vm._s(producer.name))
+                      ])
+                    ])
+                  }),
+                  0
+                )
               ])
-            ]),
-            _vm._v(" "),
-            _c(
-              "tbody",
-              _vm._l(_vm.producers, function(producer) {
-                return _c("tr", [
-                  _c("td", { staticClass: "pl-5" }, [
-                    _vm._v(_vm._s(producer.name))
-                  ])
-                ])
-              }),
-              0
-            )
-          ])
+            : _vm._e()
         ])
       ])
     ])

@@ -8,8 +8,7 @@ Route::get('/', function () {
     return redirect('/filmes/netflix');
 });
 
-Route::get('/filmes/{channel}',
-    function ($channel) {
+Route::get('/filmes/{channel}', function ($channel) {
     $table = 'movies';
     $title = 'Filmes';
     $subtitle = '';
@@ -29,8 +28,7 @@ Route::get('/filmes/{channel}',
     return view('titles', compact('title', 'subtitle', 'media', 'table'));
 })->name('movies');
 
-Route::get('/series/{channel}',
-    function ($channel) {
+Route::get('/series/{channel}', function ($channel) {
         $table = 'series';
         $title = 'Séries';
         $subtitle = '';

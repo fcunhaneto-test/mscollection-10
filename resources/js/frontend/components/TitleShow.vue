@@ -50,7 +50,7 @@
                         <h5 class="title is-5 mb-2 pb-0">Resumo:</h5>
                         <p>{{ title.synopsis }}</p>
                     </div>
-                    <table class="table is-fullwidth" >
+                    <table v-if="cast_total > 0" class="table is-fullwidth" >
                         <thead class="has-background-white">
                         <tr>
                             <th class="title is-5 has-text-dark">Ator/Personagem</th>
@@ -64,12 +64,18 @@
                         </tr>
                         </tbody>
                     </table>
-                    <table class="table is-fullwidth">
+                    <table v-if="prod_total > 0"  class="table is-fullwidth">
                         <thead class="has-background-white">
-                        <tr>
+                        <tr v-if="prod_total > 1">
                             <th class="title is-5 has-text-dark">
                                 <span v-if="table === 'movies'">Diretores</span>
                                 <span v-if="table === 'series'">Criadores</span>
+                            </th>
+                        </tr>
+                        <tr v-else>
+                            <th class="title is-5 has-text-dark">
+                                <span v-if="table === 'movies'">Diretor</span>
+                                <span v-if="table === 'series'">Criador</span>
                             </th>
                         </tr>
                         </thead>
@@ -95,8 +101,10 @@ export default {
         return {
             isOpen: false,
             url: "../images/poster/faker-poster.png",
-            cast: null,
-            producers: null,
+            cast: [],
+            cast_total: 0,
+            producers: [],
+            prod_total: 0,
         }
     },
     computed: {
@@ -115,9 +123,15 @@ export default {
     beforeMount() {
         axios.get(`/api/${this.table}/cast/${this.title.id}`).then(response => {
             this.cast = response.data
+            this.cast_total = this.cast.length
+            console.log('Total Cast', this.cast_total)
+            console.log('Cast', this.cast)
         }).catch(errors => console.log(errors))
         axios.get(`/api/${this.table}/producers/${this.title.id}`).then(response => {
             this.producers = response.data
+            this.prod_total = this.producers.length
+            console.log('Total Producers', this.prod_total)
+            console.log('Producers', this.producers)
         }).catch(errors => console.log(errors))
     }
 }
