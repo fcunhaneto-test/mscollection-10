@@ -30,4 +30,8 @@ class Media extends Model
     public function isStream() {
         return $this->where('isstream', true)->where('active', true)->get();
     }
+
+    public function isActive() {
+        return $this->where('active', true)->get();
+    }
 }

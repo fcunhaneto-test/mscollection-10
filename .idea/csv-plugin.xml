@@ -31,6 +31,20 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/app/Providers/AuthServiceProvider.php">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/app/Providers/RouteServiceProvider.php">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/app/Traits/TitlesController.php">
           <value>
             <Attribute>
@@ -45,6 +59,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/resources/js/Admin.vue">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/resources/js/Index.vue">
           <value>
             <Attribute>
@@ -56,6 +77,27 @@
           <value>
             <Attribute>
               <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/resources/js/backend/TitlesAdmin.vue">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/resources/js/backend/components/MovieFormEdit.vue">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/resources/js/backend/components/NavBar.vue">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
             </Attribute>
           </value>
         </entry>
@@ -94,6 +136,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/resources/js/routes.js">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/resources/js/store/main/getters.js">
           <value>
             <Attribute>
@@ -109,6 +158,20 @@
           </value>
         </entry>
         <entry key="/resources/js/store/main/state.js">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/resources/sass/app.scss">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/resources/views/components/navbar-admin.blade.php">
           <value>
             <Attribute>
               <option name="separator" value="," />
@@ -137,6 +200,13 @@
           </value>
         </entry>
         <entry key="/routes/web.php">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/vendor/laravel/ui/auth-backend/AuthenticatesUsers.php">
           <value>
             <Attribute>
               <option name="separator" value=";" />

@@ -19,7 +19,7 @@
 
 <script>
 export default {
-    name: "TitlesPaginate",
+    name: "TitlesAdminPaginate",
     props: {
         pages: Number,
     },

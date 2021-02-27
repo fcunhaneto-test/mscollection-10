@@ -16,10 +16,17 @@
     color: #FFFFFF;
 }
 
+.navbar-item.navbar-admin {
+    color: #0074d7;
+}
+
 .navbar-dropdown {
     background-color: #0074d7;
 }
 
+.navbar-dropdown.navbar-admin {
+    background-color: #e2e2e2;
+}
 .table {
     border-bottom: 1px solid #000000;
 }

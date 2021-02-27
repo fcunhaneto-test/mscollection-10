@@ -4,12 +4,12 @@ namespace App\Traits;
 
 trait TitlesController
 {
-    public function frontendStart($channel, $pp) {
-        return $this->table->frontendStart($channel, $pp);
+    public function titlesStart($channel, $pp) {
+        return $this->table->titlesStart($channel, $pp);
     }
 
-    public function frontendPage($channel, $page, $pp) {
-        return $this->table->frontendPage($channel, $page, $pp);
+    public function titlesPage($channel, $page, $pp) {
+        return $this->table->titlesPage($channel, $page, $pp);
     }
 
     public function cast($id)
@@ -19,5 +19,10 @@ trait TitlesController
 
     public function producers($id) {
         return $this->table->producers($id);
+    }
+
+    public function media($id) {
+        $title = $this->table->findOrFail($id);
+        return  $title->media;
     }
 }

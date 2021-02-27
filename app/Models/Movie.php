@@ -22,7 +22,7 @@ class Movie extends Model
         return $this->belongsToMany(Director::class)->withPivot('order');
     }
 
-    public function frontendStart($channel, $pp)
+    public function titlesStart($channel, $pp)
     {
         $media = new Media();
         $id = $media->where('slug', $channel)->first()->id;
@@ -32,7 +32,7 @@ class Movie extends Model
         return [$total, $movies];
     }
 
-    public function frontendPage($channel, $page, $pp)
+    public function titlesPage($channel, $page, $pp)
     {
         $media = new Media();
         $id = $media->where('slug', $channel)->first()->id;

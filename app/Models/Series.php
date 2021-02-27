@@ -26,7 +26,7 @@ class Series extends Model
         return $this->hasMany(Season::class);
     }
 
-    public function frontendStart($channel, $pp)
+    public function titlesStart($channel, $pp)
     {
         $media = new Media();
         $id = $media->where('slug', $channel)->first()->id;
@@ -36,7 +36,7 @@ class Series extends Model
         return [$total, $series];
     }
 
-    public function frontendPage($channel, $page, $pp)
+    public function titlesPage($channel, $page, $pp)
     {
         $media = new Media();
         $id = $media->where('slug', $channel)->first()->id;

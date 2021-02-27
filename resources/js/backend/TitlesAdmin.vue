@@ -25,21 +25,23 @@
             <titles-paginate :pages="pages"></titles-paginate>
             <titles-table @showTitle="showPage($event)"></titles-table>
         </div>
-        <title-show v-else :title="title" @showTable="show_page = !show_page"></title-show>
+        <div v-else>
+            <movie-form v-if="table === 'movies'" :title="title" @closeEditForm="show_page = !show_page"></movie-form>
+        </div>
     </div>
 </template>
 
 <script>
-import TitlesPaginate from "./components/TitlesPaginate";
-import TitlesTable from "./components/TitlesTable";
-import TitleShow from "./components/TitleShow";
+import TitlesAdminPaginate from "./components/TitlesAdminPaginate"
+import TitlesAdminTable from "./components/TitlesAdminTable";
+import MovieFormEdit from "./components/MovieFormEdit";
 
 export default {
-    name: "Titles",
+    name: "TitlesAdmin",
     components: {
-        TitlesPaginate,
-        TitlesTable,
-        TitleShow
+        titlesPaginate: TitlesAdminPaginate,
+        titlesTable: TitlesAdminTable,
+        movieForm: MovieFormEdit,
     },
     props: {
         header: String,
@@ -86,7 +88,7 @@ export default {
         }
     },
     beforeMount() {
-       this.startTitles()
+        this.startTitles()
     },
 }
 </script>

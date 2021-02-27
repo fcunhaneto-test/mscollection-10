@@ -19,10 +19,11 @@ Vue.filter('strTime', function (value) {
 })
 
 import Index from './Index'
+import Admin from "./Admin";
 
 const app = new Vue({
     el: '#app',
     store,
     router,
-    components: {Index}
+    components: {Index, Admin}
 });
